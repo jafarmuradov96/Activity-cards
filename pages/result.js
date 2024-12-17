@@ -97,6 +97,8 @@ const ResultPage = () => {
     fetchData();
   }, []);
 
+  console.log("cards result", cards);
+  
   return (
     <>
       <Head>

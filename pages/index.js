@@ -126,6 +126,10 @@ export default function Home() {
     fetchData();
   }, []);
 
+  console.log("cardData", cardData);
+  console.log("heroData", heroData);
+  
+  
   return (
     <>
       <Head>
