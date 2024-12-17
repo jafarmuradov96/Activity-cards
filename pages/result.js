@@ -4,8 +4,15 @@ import Head from "next/head";
 import React from "react";
 
 export async function getStaticProps() {
-  const res = await getCardData();
-  return { props: { res } };
+
+  try {
+    const res = await getCardData();
+    return { props: { res } };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return { props: { res: [] } };
+  }
+
 }
 
 const ResultPage = ({ res }) => {
