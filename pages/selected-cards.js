@@ -53,24 +53,38 @@
 import ActivityCard from "@/components/cards/ActivityCard";
 import { getCardData } from "@/services/getCardData";
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
-  try {
-    const res = await getCardData();
-    return { props: { res } };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return { props: { res: [] } };
-  }
+//   try {
+//     const res = await getCardData();
+//     return { props: { res } };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return { props: { res: [] } };
+//   }
 
-}
+// }
 
-const SelectedCards = ({ res }) => {
-  const cards = res?.card;
+const SelectedCards = () => {
+  // const cards = res?.card;
   const [selectedCards, setSelectedCards] = useState([]);
+  const [cards, setCards] = useState([]);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await getCardData();
+        setCards(res?.card);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   const handleCardSelect = (card) => {
     if (selectedCards.includes(card)) {
@@ -142,9 +156,9 @@ const SelectedCards = ({ res }) => {
             <path
               d="M18.6667 4.59144C17.2609 3.89282 15.6763 3.5 14 3.5C8.20101 3.5 3.5 8.20101 3.5 14C3.5 19.799 8.20101 24.5 14 24.5C19.799 24.5 24.5 19.799 24.5 14C24.5 13.6057 24.4783 13.2164 24.4359 12.8333M24.5 5.83333L14 16.3333L10.5 12.8333"
               stroke="#E8FDF8"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </button>

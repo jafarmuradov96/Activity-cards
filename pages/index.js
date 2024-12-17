@@ -10,32 +10,51 @@ import StepSection from "@/components/sections/StepSection";
 import Link from "next/link";
 import Button from "@/components/element/Button";
 import Header from "@/components/layout/header";
+import { useEffect, useState } from "react";
 
-export async function getStaticProps() {
-  try {
-    const [hero, card] = await Promise.all([getHero(), getCardData()]);
+// export async function getStaticProps() {
+//   try {
+//     const [hero, card] = await Promise.all([getHero(), getCardData()]);
 
-    return {
-      props: {
-        hero,
-        card,
-      },
+//     return {
+//       props: {
+//         hero,
+//         card,
+//       },
+//     };
+//   } catch (error) {
+//     console.error("Failed to fetch data", error);
+
+//     return {
+//       props: {
+//         hero: [],
+//         card: [],
+//       },
+//     };
+//   }
+// }
+
+export default function Home() {
+  // const dataHero = hero?.slider;
+  // const dataCard = card?.card;
+
+  const [heroData, setHeroData] = useState([]);
+  const [cardData, setCardData] = useState([]);
+
+  // Fetch API data on the client side
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [hero, card] = await Promise.all([getHero(), getCardData()]);
+        setHeroData(hero?.slider || []);
+        setCardData(card?.card || []);
+      } catch (error) {
+        console.error("Failed to fetch data", error);
+      }
     };
-  } catch (error) {
-    console.error("Failed to fetch data", error);
 
-    return {
-      props: {
-        hero: [],
-        card: [],
-      },
-    };
-  }
-}
-
-export default function Home({ hero, card }) {
-  const dataHero = hero?.slider;
-  const dataCard = card?.card;
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -45,7 +64,7 @@ export default function Home({ hero, card }) {
       <>
       <Header />
         
-        <Hero dataHero={dataHero} dataCard={dataCard} />
+        <Hero dataHero={heroData} dataCard={cardData} />
 
         <div className="bg-bgSecondary h-[486px] flex items-center justify-center mt-[94px]">
           <div className="max-w-[1224px] mx-auto flex items-center justify-between w-full">
@@ -62,7 +81,7 @@ export default function Home({ hero, card }) {
                     </div>
                   </div>
                 </div>
-                <span className="text-[32px]">Şagird</span>
+                <span className="text-[32px]">Tələbə</span>
               </div>
 
               <div className="flex flex-col items-center  justify-center bg-white rounded-[40px] w-[320px] h-[200px] ">

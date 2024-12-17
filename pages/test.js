@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ActivityCard from "@/components/cards/ActivityCard";
 import { getCardData } from "@/services/getCardData";
 import Head from "next/head";
@@ -7,28 +7,43 @@ import notSuitable from "../public/uygun deyil.png"
 import Image from "next/image";
 
 
-export async function getStaticProps() {
-  try {
-    const res = await getCardData();
-    return { props: { res } };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return { props: { res: [] } };
-  }
+// export async function getStaticProps() {
+//   try {
+//     const res = await getCardData();
+//     return { props: { res } };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return { props: { res: [] } };
+//   }
 
-}
+// }
 
 const TestSlider = ({ res }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [cards, setCards] = useState([]); 
 
-  const slides = res?.card;
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await getCardData();
+        setCards(res?.card);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  console.log(cards, 'cards');
+  
+  // const slides = res?.card;
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % cards.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + cards.length) % cards.length);
   };
 
 
@@ -39,7 +54,7 @@ const TestSlider = ({ res }) => {
         <title>Test</title>
       </Head>
     <div className="flex items-center justify-center gap-[10px] mt-[70px] ">
-      {Array.from({ length: slides?.length }, (_, index) => (
+      {Array.from({ length: cards?.length }, (_, index) => (
           <span 
             key={index}  
             className={`w-[28px] h-[8px] rounded-[27px] ${
@@ -76,7 +91,7 @@ const TestSlider = ({ res }) => {
             </svg>
           </button>
           <div className="flex flex-col items-center text-center">
-            <ActivityCard dataCard={slides[currentSlide]} />
+            <ActivityCard dataCard={cards[currentSlide]} />
           </div>
 
           <button
