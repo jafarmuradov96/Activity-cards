@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import Button from "../element/Button";
 import ActivityCard from "../cards/ActivityCard";

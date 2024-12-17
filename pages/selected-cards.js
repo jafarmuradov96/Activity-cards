@@ -112,7 +112,7 @@
 // export default SelectedCards;
 
 
-
+'use client';
 
 import { getCardData } from "@/services/getCardData";
 import Head from "next/head";

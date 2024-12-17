@@ -65,6 +65,9 @@
 
 // export default ResultPage;
 
+
+'use client';
+
 import Header from "@/components/layout/header";
 import { getCardData } from "@/services/getCardData";
 import Head from "next/head";

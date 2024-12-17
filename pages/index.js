@@ -89,6 +89,7 @@
 //   );
 // }
 
+'use client';
 
 import Head from "next/head";
 import Hero from "@/components/sections/Hero";

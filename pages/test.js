@@ -137,7 +137,7 @@
 // export default TestSlider;
 
 
-
+'use client';
 
 import React, { useEffect, useState } from "react";
 import ActivityCard from "@/components/cards/ActivityCard";
