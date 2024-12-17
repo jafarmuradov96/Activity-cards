@@ -122,17 +122,17 @@ import axios from "axios";
 const SelectedCards = () => {
   const [selectedCards, setSelectedCards] = useState([]);
   const [cards, setCards] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await getCardData();
         setCards(res?.card);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching data:", error);
-        setLoading(false); // Set loading to false even on error
+        setLoading(false); 
       }
     }
     fetchData();
@@ -173,7 +173,6 @@ const SelectedCards = () => {
         <h3 className="text-center text-[24px] font-[700] text-textFourth">
           İndi isə, ən uyğun olan 3 kartı seçin
         </h3>
-        {/* Conditional rendering for loading state */}
         {loading ? (
           <div className="flex justify-center items-center mt-10">
             <span>Loading...</span> {/* You can replace this with a spinner */}
