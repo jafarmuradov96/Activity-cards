@@ -127,7 +127,7 @@ import image4 from '../../public/Layer_1 (2).png';
 
 export default function StepSection() {
   return (
-    <section className="mt-[194px] mb-12">
+    <section className=" mb-12">
       <h3 className="text-center text-[48px] font-[700] mb-[122px]">
         Fəaliyyət kartları necə işləyir?
       </h3>

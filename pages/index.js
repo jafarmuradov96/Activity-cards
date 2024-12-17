@@ -138,7 +138,7 @@ export default function Home() {
       <>
         <Header />
         
-        {loading ? ( // Conditionally render loader
+        {loading ? ( 
           <div className="flex items-center justify-center h-screen">
             <span className="text-2xl font-bold">Yüklənir...</span>
           </div>
@@ -175,8 +175,9 @@ export default function Home() {
               </div>
             </div>
 
+            <div id="rules" className="h-[194px]">
+            </div>
             <StepSection />
-
             <Link href="/test">
               <div className="flex items-center justify-center mb-[100px]">
                 <Button className="w-[208px] h-[56px] text-[20px]">

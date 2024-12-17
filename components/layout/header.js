@@ -21,7 +21,7 @@ const Header = () => {
         </Link>
         <nav>
           <ul className="flex gap-[40px] text-[20px]" style={{ color: '#4C4C4C'}}>
-            <li>Qaydalar</li>
+            <li><a href="#rules">Qaydalar</a></li>
             <li>Ətraflı məlumat</li>
             <li>Əlaqə</li>
           </ul>

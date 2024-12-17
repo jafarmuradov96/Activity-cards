@@ -37,7 +37,7 @@ const Hero = ({ dataHero, dataCard }) => {
             </svg>
           </Button>
           </Link>
-          <Link href="/">
+          <Link href="#rules">
           <button className="text-[18px] lg:text-[20px] h-[56px] w-[160px] text-textSecondary bg-buttonSecondary rounded-[8px] hover:bg-gray-100">
             Qaydaları oxu
           </button>
