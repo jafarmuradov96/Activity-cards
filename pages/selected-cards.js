@@ -163,6 +163,7 @@ const SelectedCards = () => {
 
   console.log(cards, 'selecetedd');
   
+  
 
   return (
     <>
