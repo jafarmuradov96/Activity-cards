@@ -45,7 +45,9 @@ const SelectedCards = () => {
     } else {
       alert("Ən az bir kart seçməlisiniz!");
     }
-  };
+  }; 
+
+  
 
   console.log(cards, 'selecetedd');
   
