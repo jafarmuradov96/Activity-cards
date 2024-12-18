@@ -1,34 +1,13 @@
-
-
-
-'use client';
-
-import Header from "@/components/layout/header";
-import { getCardData } from "@/services/getCardData";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import Header from "@/components/layout/header";
+import { useSelector } from "react-redux";
 
 const ResultPage = () => {
-  const [cards, setCards] = useState([]); // State for fetched cards
-  const [loading, setLoading] = useState(true); // State for loading indicator
+  const selectedCards = useSelector((state) => state.cards.selectedCards);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setLoading(true); // Start loading
-        const res = await getCardData();
-        setCards(res?.card.slice(0, 10)); // Set fetched data
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Stop loading
-      }
-    }
-    fetchData();
-  }, []);
+  console.log("selectedCards", selectedCards);
 
-  console.log("cards result", cards);
 
   return (
     <>
@@ -43,15 +22,8 @@ const ResultPage = () => {
           </h3>
         </div>
 
-        {loading ? (
-          // Loading spinner or text
-          <div className="flex justify-center items-center py-[100px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
-            <p className="ml-4 text-[20px] font-medium">Yüklənir...</p>
-          </div>
-        ) : (
-          // Display cards once data is loaded
-          cards?.map((card, index) => (
+
+          {selectedCards?.map((card, index) => (
             <div
               key={index}
               className="max-w-[1224px] mx-auto rounded-[16px] bg-white py-[60px] px-[44px] mb-[84px]"
@@ -145,7 +117,7 @@ const ResultPage = () => {
                 </Link>
               </div>
             </div>
-          ))
+          )
         )}
       </div>
     </>
