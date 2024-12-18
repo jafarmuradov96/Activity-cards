@@ -41,7 +41,7 @@ export default function StepSection() {
           <div className="w-[350px]">
             <h6 className="text-[32px] font-[700]">Seçim et</h6>
             <p className="text-[20px] text-textFourth">
-              Sizə təqdim olunan 31 kartı oxuyaraq müvafiq olaraq  “Uyğundur” və
+              Sizə təqdim olunan 32 kartı oxuyaraq müvafiq olaraq  “Uyğundur” və
               ya “Uyğun deyil” düyməsinə klikləyin
             </p>
           </div>
