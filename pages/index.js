@@ -16,27 +16,43 @@ import Button from "@/components/element/Button";
 import Header from "@/components/layout/header";
 import { useEffect, useState } from "react";
 
-export default function Home() {
-  const [heroData, setHeroData] = useState([]);
-  const [cardData, setCardData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true); // Start loading
-        const [hero, card] = await Promise.all([getHero(), getCardData()]);
-        setHeroData(hero?.slider || []);
-        setCardData(card?.card || []);
-      } catch (error) {
-        console.error("Failed to fetch data", error);
-      } finally {
-        setLoading(false); // Stop loading
-      }
-    };
+export async function getServerSideProps() {
+  try {
+    const hero = await getHero();
+    const card = await getCardData();
+    return { props: { hero, card } };
+  } catch (error) {
+    console.error("SSR Error:", error);
+    return { props: { hero: [], card: [] } };
+  }
+}
 
-    fetchData();
-  }, []);
+
+export default function Home( { hero, card } ) {
+  // const [heroData, setHeroData] = useState([]);
+  // const [cardData, setCardData] = useState([]);
+  // const [loading, setLoading] = useState(false); 
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoading(true); // Start loading
+  //       const [hero, card] = await Promise.all([getHero(), getCardData()]);
+  //       setHeroData(hero?.slider || []);
+  //       setCardData(card?.card || []);
+  //     } catch (error) {
+  //       console.error("Failed to fetch data", error);
+  //     } finally {
+  //       setLoading(false); // Stop loading
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  const cardData = card?.card || [];
+  const heroData = hero?.slider || [];
 
   console.log("cardData", cardData);
   console.log("heroData", heroData);
@@ -50,11 +66,8 @@ export default function Home() {
       <>
         <Header />
         
-        {loading ? ( 
-          <div className="flex items-center justify-center h-screen">
-            <span className="text-2xl font-bold">Yüklənir...</span>
-          </div>
-        ) : (
+       
+        {/* ( */}
           <>
             <Hero dataHero={heroData} dataCard={cardData} />
 
@@ -98,7 +111,7 @@ export default function Home() {
               </div>
             </Link>
           </>
-        )}
+        {/* )} */}
       </>
     </>
   );
